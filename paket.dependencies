@@ -1,0 +1,8 @@
+framework: auto-detect
+storage: none
+source https://api.nuget.org/v3/index.json
+
+nuget BCrypt.Net-Next
+nuget Jet.ConfluentKafka.fsharp 1.0.0-rc10 rc
+nuget NETCore.Encrypt
+nuget Serilog.Sinks.Console

@@ -1,0 +1,5 @@
+FSharp.Core
+Jet.ConfluentKafka.fsharp
+BCrypt.Net-Next
+NETCore.Encrypt
+Serilog.Sinks.Console

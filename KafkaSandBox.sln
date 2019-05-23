@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{36CD90F2-8245-4A48-A2BF-D613AC6C2DE6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{D3D7DB94-F49F-4CB7-B882-56F589DA4839}"
+ProjectSection(SolutionItems) = preProject
+	paket.lock = paket.lock
+	paket.dependencies = paket.dependencies
+EndProjectSection
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "KafkaSandBox.Producer", "src\KafkaSandBox.Producer\KafkaSandBox.Producer.fsproj", "{86348EBA-64B6-4EA7-9BEA-47EEF8D096EE}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "KafkaSandBox.Consumer", "src\KafkaSandBox.Consumer\KafkaSandBox.Consumer.fsproj", "{04D4DD56-8956-46D0-8343-4A96B132E822}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{86348EBA-64B6-4EA7-9BEA-47EEF8D096EE} = {36CD90F2-8245-4A48-A2BF-D613AC6C2DE6}
+		{04D4DD56-8956-46D0-8343-4A96B132E822} = {36CD90F2-8245-4A48-A2BF-D613AC6C2DE6}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{86348EBA-64B6-4EA7-9BEA-47EEF8D096EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86348EBA-64B6-4EA7-9BEA-47EEF8D096EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86348EBA-64B6-4EA7-9BEA-47EEF8D096EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86348EBA-64B6-4EA7-9BEA-47EEF8D096EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04D4DD56-8956-46D0-8343-4A96B132E822}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04D4DD56-8956-46D0-8343-4A96B132E822}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04D4DD56-8956-46D0-8343-4A96B132E822}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04D4DD56-8956-46D0-8343-4A96B132E822}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
