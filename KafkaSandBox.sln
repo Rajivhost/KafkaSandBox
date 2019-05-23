@@ -12,6 +12,11 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "KafkaSandBox.Producer", "sr
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "KafkaSandBox.Consumer", "src\KafkaSandBox.Consumer\KafkaSandBox.Consumer.fsproj", "{04D4DD56-8956-46D0-8343-4A96B132E822}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".env", ".env", "{4007DDA1-C042-433B-A4D5-DE32A3265F90}"
+ProjectSection(SolutionItems) = preProject
+	docker-compose.yml = docker-compose.yml
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
