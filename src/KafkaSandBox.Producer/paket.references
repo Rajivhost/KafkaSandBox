@@ -2,3 +2,6 @@ FSharp.Core
 Jet.ConfluentKafka.fsharp
 NETCore.Encrypt
 Serilog.Sinks.Console
+FsConfig
+FsToolkit.ErrorHandling
+FSharp.UMX
