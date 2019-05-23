@@ -7,29 +7,25 @@ open NETCore.Encrypt
 
 [<EntryPoint>]
 let main argv =
-    printfn "Hello World from F#!"
     let logger =
         LoggerConfiguration()
             .Enrich.FromLogContext()
             .WriteTo.Console()
             .CreateLogger()
+    logger.Information("Kafka Producer started")
     let topicName = "test-messages"
     let broker = "localhost:9092"
 
-    let conf =
+    use adminClient =
         new AdminClientConfig()
         |> fun conf ->
             conf.BootstrapServers <- broker
             conf
-
-    use adminClient =
-        conf
         |> AdminClientBuilder
         |> fun builder -> builder.Build()
-        
-//    let createTopicIfNotExist (producer : IProducer<_,_>, topicName: string) =
-//        producer.Get
 
+    //    let createTopicIfNotExist (producer : IProducer<_,_>, topicName: string) =
+    //        producer.Get
     let meta = adminClient.GetMetadata(TimeSpan.FromSeconds(20.))
     //    let topicSpecification = new TopicSpecification()
     //    topicSpecification.Name <- topicName
@@ -41,13 +37,11 @@ let main argv =
         KafkaProducerConfig.Create
             ("fnstack-producer", Uri broker, Confluent.Kafka.Acks.Leader,
              Confluent.Kafka.CompressionType.Lz4, maxInFlight = 1_000_000)
-    let message = "test"
+    let message = "Hi everyone"
     let key = message |> EncryptProvider.Sha256
     use producer = (logger, cfg, topicName) |> KafkaProducer.Create
     (key, message)
     |> producer.ProduceAsync
     |> Async.RunSynchronously
     |> ignore
-    //    use c = CustomConsumer.start cfg args.Parallelism
-    //    c.AwaitCompletion() |> Async.RunSynchronously
     0 // return an integer exit code
