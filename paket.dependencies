@@ -9,3 +9,6 @@ nuget Jet.ConfluentKafka.fsharp 1.0.0-rc10 rc
 nuget NETCore.Encrypt
 nuget Serilog.Sinks.Console
 nuget FSharp.UMX preview
+nuget Equinox preview
+nuget Equinox.EventStore preview
+nuget Equinox.MemoryStore preview
