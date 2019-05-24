@@ -38,6 +38,29 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
+  ## Kafka rest
+  kafka-rest:
+        image: confluentinc/cp-kafka-rest
+        container_name: kafkarest
+        environment:
+            KAFKA_REST_ZOOKEEPER_CONNECT: "zookeeper:2181"
+            KAFKA_REST_HOST_NAME: "kafkarest"
+            KAFKA_REST_LISTENERS: "http://kafkarest:8082"
+        depends_on:
+            - "kafka"
+            - "zookeeper"
+
+  ## Kafka topics ui
+  kafka-topic-ui:
+        image: landoop/kafka-topics-ui
+        environment:
+            KAFKA_REST_PROXY_URL: "http://kafkarest:8082"
+            PROXY: "true"
+        ports:
+            - "8000:8000"
+        depends_on:
+            - "kafka-rest"
+
   eventstore:
       image: eventstore/eventstore
       ports:
