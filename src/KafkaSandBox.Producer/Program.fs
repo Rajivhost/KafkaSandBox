@@ -1,9 +1,9 @@
 open System
 open Jet.ConfluentKafka.FSharp
 open Confluent.Kafka
-open Confluent.Kafka.Admin
 open Serilog
 open NETCore.Encrypt
+open KafkaSandBox
 
 [<EntryPoint>]
 let main argv =
@@ -13,8 +13,8 @@ let main argv =
             .WriteTo.Console()
             .CreateLogger()
     logger.Information("Kafka Producer started")
-    let topicName = "test-messages"
-    let broker = "localhost:9092"
+    let topicName = kafkaConfig.Topic
+    let broker = kafkaConfig.Broker
 
     use adminClient =
         new AdminClientConfig()
@@ -35,8 +35,10 @@ let main argv =
     //    [|topicSpecification|] |> adminClient.CreateTopicsAsync |> Async.AwaitTask |> Async.RunSynchronously |> ignore
     let cfg =
         KafkaProducerConfig.Create
-            ("fnstack-producer", Uri broker, Confluent.Kafka.Acks.Leader,
-             Confluent.Kafka.CompressionType.Lz4, maxInFlight = 1_000_000)
+            ("fnstack-producer", Uri broker, Acks.All, CompressionType.Lz4,
+             maxInFlight = 5, retries = 10_000_000,
+             customize = (fun config ->
+             config.EnableIdempotence <- true |> Nullable.op_Implicit))
     let message = "Hi everyone"
     let key = message |> EncryptProvider.Sha256
     use producer = (logger, cfg, topicName) |> KafkaProducer.Create
