@@ -2,6 +2,7 @@ open System
 open Jet.ConfluentKafka.FSharp
 open Serilog
 open Newtonsoft.Json
+open Figgle
 
 [<EntryPoint>]
 let main argv =
@@ -10,6 +11,8 @@ let main argv =
             .Enrich.FromLogContext()
             .WriteTo.Console()
             .CreateLogger()
+    let banner = FiggleFonts.Starwars.Render("FnStack")
+    printfn "%s" banner
     logger.Information("Kafka Consumer started")
     let topicName = "test-messages"
     let broker = "localhost:9092"

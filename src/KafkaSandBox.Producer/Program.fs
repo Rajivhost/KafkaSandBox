@@ -13,13 +13,9 @@ let main _ =
             .Enrich.FromLogContext()
             .WriteTo.Console()
             .CreateLogger()
-
     let banner = FiggleFonts.Starwars.Render("FnStack")
-
     printfn "%s" banner
-
     logger.Information("FnStack Producer started")
-
     let topicName = kafkaConfig.Topic
     let broker = kafkaConfig.Broker
 
@@ -46,14 +42,11 @@ let main _ =
              maxInFlight = 5, retries = 10_000_000,
              customize = (fun config ->
              config.EnableIdempotence <- true |> Nullable.op_Implicit))
-
     use producer = (logger, cfg, topicName) |> KafkaProducer.Create
-
     while true do
         Console.Write("New Message: ")
         let message = Console.ReadLine()
         let key = message |> EncryptProvider.Sha256
-
         (key, message)
         |> producer.ProduceAsync
         |> Async.RunSynchronously
