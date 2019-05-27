@@ -12,3 +12,4 @@ nuget FSharp.UMX preview
 nuget Equinox preview
 nuget Equinox.EventStore preview
 nuget Equinox.MemoryStore preview
+nuget Figgle

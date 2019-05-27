@@ -4,15 +4,22 @@ open Confluent.Kafka
 open Serilog
 open NETCore.Encrypt
 open KafkaSandBox
+open Figgle
 
 [<EntryPoint>]
-let main argv =
+let main _ =
     let logger =
         LoggerConfiguration()
             .Enrich.FromLogContext()
             .WriteTo.Console()
             .CreateLogger()
-    logger.Information("Kafka Producer started")
+
+    let banner = FiggleFonts.Starwars.Render("FnStack")
+
+    printfn "%s" banner
+
+    logger.Information("FnStack Producer started")
+
     let topicName = kafkaConfig.Topic
     let broker = kafkaConfig.Broker
 
@@ -39,11 +46,16 @@ let main argv =
              maxInFlight = 5, retries = 10_000_000,
              customize = (fun config ->
              config.EnableIdempotence <- true |> Nullable.op_Implicit))
-    let message = "Hi everyone"
-    let key = message |> EncryptProvider.Sha256
+
     use producer = (logger, cfg, topicName) |> KafkaProducer.Create
-    (key, message)
-    |> producer.ProduceAsync
-    |> Async.RunSynchronously
-    |> ignore
+
+    while true do
+        Console.Write("New Message: ")
+        let message = Console.ReadLine()
+        let key = message |> EncryptProvider.Sha256
+
+        (key, message)
+        |> producer.ProduceAsync
+        |> Async.RunSynchronously
+        |> ignore
     0 // return an integer exit code

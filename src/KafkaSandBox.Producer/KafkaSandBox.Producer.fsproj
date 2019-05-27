@@ -4,8 +4,12 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="Common\Config.fs" />
+        <Compile Include="Common\Types.fs" />
+    </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config.fs" />
+    <Compile Include="DomainTypes.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>
